@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css?family=East Sea Dokdo|Caveat|Shadows+Into+Light');  
+img {
+  max-width: 12%;
+  max-height: auto;
+  float: left;
+  padding-left: 10px;
+}
+
+span {
+  margin: none;
+  padding-top: 40px;
+  padding-bottom: 0;
+  padding-left: 10px;
+  border-radius: 3px;
+  font-family: 'Shadows Into Light', cursive;
+  float: left;
+  font-size: 55px;
+  font-weight: lighter;
+  color:whitesmoke;
+  text-shadow: 0.5px 0.5px rgba(0, 0, 0, 0.678)
+}
+
+h1 {
+  background-image: linear-gradient( to top, rgba(208, 238, 36, 0.123), transparent) ;
+  height: 150px;
+  border-radius: 20px
+}
+
+html {
+  background-image: url('paperPlane.jpg'); 
+  background-size: cover;
+}
+
+body {
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-bottom: 50px;
+  color: whitesmoke;
+}
+
+.input {
+  height:75px;
+  text-align: center;
+}
+
+#taskList {
+  list-style: none;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.displayTask {
+  text-align: center;
+}
+
+ul:not(:empty) {
+  padding: 0;
+  max-height: 350px;
+  overflow-y: auto;
+  opacity: 1;
+}
+
+li {
+  position: relative;
+  padding: 5px;
+  margin: 4px;
+  height: 30px;
+  transition: all 0.4s ease-out;
+  opacity: 0;
+  color: whitesmoke;
+  background-color: rgba(56, 54, 54, 0.103);
+  border-radius: 5px
+}
+
+li.active, li.inactive {
+  opacity: 1;
+}
+
+/* li:nth-last-child(1) {
+  border-bottom: 2px whitesmoke;
+} */
+
+li:hover {
+  background-color: rgba(56, 54, 54, 0.349);
+}
+
+li>input {
+  background-color: rgba(129, 128, 128, 0.555);
+  padding-top: 3px;
+  border: none;
+  border-radius: 3px;
+  color: whitesmoke;
+  width: 55%;
+  font-family: 'Libre Franklin', sans-serif;
+  font-style: italic
+}
+
+#taskInp {
+  width: 500px; 
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.5px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  border-bottom-style: solid;
+  border-color: rgb(182, 180, 180);
+  height: 30px;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-family: 'Libre Franklin', sans-serif;
+  font-size: 18px;
+  color: whitesmoke;
+}
+
+#taskInp:focus, #taskInp:hover  {
+  background-color: rgba(56, 54, 54, 0.103);
+}
+
+#taskInp::placeholder {
+  font-size: small;
+  opacity: 0.4;
+}
+
+#addTask {
+  height: 35px;
+  width: 100px;
+  background: transparent;
+  border-radius: 20px;
+  border: 2px solid whitesmoke;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 1px 2px rgba(51, 50, 50, 0.212);
+  color: whitesmoke;
+  font-family: 'Libre Franklin', sans-serif;
+  text-align: center;
+  box-shadow: 2px 4px rgba(51, 50, 50, 0.212);
+}
+
+#addTask:hover {
+  background-color: rgba(20, 19, 19, 0.219);
+}
+
+#addTask:active {
+  box-shadow: 0 2px rgba(51, 50, 50, 0.212);
+  transform: translateY(2px);
+}
+
+.complete, .edit, .delete, .addNote {
+  float: right;
+  width: 10%;
+  height: 25px;
+  color:whitesmoke;
+  background-color: transparent;
+  border: none;
+  font-family: 'Libre Franklin', sans-serif;
+  font-weight: bold;
+}
+
+li>button:not(:disabled):hover {
+  text-shadow: 1px 1px black;
+}
+
+.inactive>input {
+  text-decoration: line-through;
+}
+
+.noEdit {
+  color: whitesmoke;
+  background: transparent;
+  border: none;
+  font-size: medium
+}
+
+.editMode {
+  border: none;
+  width: 55%;
+  height: 25px;
+}
+
+.noteEdit {
+  position: absolute;
+  margin-left: 2%;
+  left: 6px;
+  top: 40px;
+  width: 50%;
+  height: 65%;
+  resize: none;
+  font-size: medium;
+  background-color: rgba(20, 49, 29, 0.623);
+  border: none;
+  font-family: 'Libre Franklin', sans-serif;
+  color: whitesmoke
+}
+
+.noteDone {
+  display: none
+}
+
+button:disabled {
+  color: rgba(26, 25, 25, 0.507);
+}
