@@ -1,18 +1,13 @@
 const taskInp = document.getElementById('taskInp')
 const list = document.getElementById('taskList')
 const add = document.getElementById('addTask')
-let fetch = window.fetch()
 
 let taskObj = {
-  method: 'POST', // *GET, POST, PUT, DELETE, etc.
-  //   mode: 'cors', // no-cors, cors, *same-origin
-  //   cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-  //   credentials: 'same-origin', // include, *same-origin, omit
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   redirect: 'follow', // manual, *follow, error
-  //   referrer: 'no-referrer', // no-referrer, *client
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
+  },
   body: ''
 }
 
@@ -22,9 +17,9 @@ add.addEventListener('click', () => {
 })
 
 function addTask (task) {
-  taskObj.body = task
+  taskObj.body = JSON.stringify([task])
   console.log('from fetch', taskObj)
-  return fetch('/', taskObj)
+  fetch('/', taskObj)
     .catch((err) => {
       console.log(err)
     })
