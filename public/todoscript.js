@@ -2,13 +2,26 @@ const taskInp = document.getElementById('taskInp')
 const list = document.getElementById('taskList')
 const add = document.getElementById('addTask')
 
-let taskObj = {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json'
-  },
-  body: ''
+let header = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+function displayTask () {
+  fetch('/getTasks', {
+    method: 'GET',
+    Headers: header
+  })
+    .then((res) => {
+      return res.json()
+    })
+    .then(function (result) {
+      console.log(result)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  // taskObj.method = 'POST'
 }
 
 add.addEventListener('click', () => {
@@ -17,10 +30,17 @@ add.addEventListener('click', () => {
 })
 
 function addTask (task) {
-  taskObj.body = JSON.stringify([task])
-  console.log('from fetch', taskObj)
-  fetch('/', taskObj)
+  const data = JSON.stringify([task])
+  console.log('from fetch', data)
+  fetch('/', {
+    method: 'POST',
+    headers: header,
+    body: data
+  })
     .catch((err) => {
       console.log(err)
     })
+  // delete taskObj.body
 }
+
+displayTask()
