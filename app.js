@@ -11,36 +11,48 @@ app.use(bodyParser.urlencoded({ extended: true }))
 const { Client } = require('pg')
 var conString = 'postgres://postgres:@localhost:5432/todo'
 
-app.get('/getTasks', function (req, res) {
+app.get('/getTasks', async function (req, res) {
   const client = new Client(conString)
-  client.connect()
-    .then(() => {
-      const sql = 'SELECT * FROM TODOS;'
-      return client.query(sql)
-    })
-    .then((result) => {
-      // console.log(res.Client)
-      // res.set('Content-Type', 'application/json')
-      res.send(result.rows)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+  await client.connect()
+
+  const sql = 'SELECT * FROM TODOS;'
+  const result = await client.query(sql)
+
+  res.send(result.rows)
 })
 
-app.post('/', (req, res) => {
+app.post('/add', async function (req, res) {
   const client = new Client(conString)
-  client.connect()
-    .then(() => {
-      const sql = 'INSERT INTO TODOS(taskname, state, note) VALUES($1,$2,$3);'
-      const param = [(req.body)[0], 'active', null]
-      return client.query(sql, param)
-      // console.log(req.body)
-    })
-    .then(() => {
-      res.redirect('/')
-    })
+  await client.connect()
+
+  const sql = 'INSERT INTO TODOS(taskname, state, note) VALUES($1,$2,$3) RETURNING task_id;'
+  const param = [req.body.taskname, req.body.state, req.body.note]
+  let result = await client.query(sql, param)
+
+  // console.log(result.rows[0])
+  res.send(result.rows[0])
+})
+
+app.post('/delete', async function (req, res) {
+  console.log('deleting...', req.body)
+  const client = new Client(conString)
+  await client.connect()
+  const param = req.body.id
+  const sql = 'DELETE FROM TODOS WHERE task_id=' + param + ';'
+  await client.query(sql)
     .catch((err) => console.log(err))
+  res.end('ok')
+  // console.log(res)
+})
+
+app.post('/state', async function (req, res) {
+  const client = new Client(conString)
+  await client.connect()
+
+  const sql = 'UPDATE TODOS SET state = $1 WHERE task_id = $2 RETURNING state;'
+  const param = [req.body.state, req.body.id]
+  let resp = await client.query(sql, param)
+  console.log(resp)
 })
 
 app.listen(5433)
